@@ -1,0 +1,142 @@
+---
+title: "Class 06: R Functions"
+author: "Laura Sun (PID: A17923552)"
+format: pdf
+---
+
+All functions in R have at least 3 things:
+
+- A **name**, we pick this and use it to call the function.
+- Input **arguments**, there can by multiple comma separated inputs to the function.
+- The **body**, lines of R code that do the work of the function.
+
+
+Our first wee function: 
+
+```{r}
+add <- function(x,y=1){
+  x + y
+}
+```
+
+Let's test our function
+
+```{r}
+add(c(1,2,3), y=10)
+```
+```{r}
+add(10,100)
+```
+
+## A second function
+
+Let's try something more interesting. Make a sequence generation tool.
+
+The `sample()` function could be useful here.
+
+```{r}
+sample(1:10, size=3)
+```
+
+Change this to work with the nucleotides ATCG and return 3 of them. 
+
+```{r}
+sample(c("A", "T", "C", "G"), size=3)
+```
+Or I can name them as n and sample(n, size=3).
+
+With the above code, I can't generate more than 4 (sample larger than the population). Try this instead, replace (sampling be with replacement). Default is FALSE, we set to TRUE.
+
+```{r}
+n <- c("A", "T", "C", "G")
+sample(n, size=10, replace = TRUE)
+```
+
+Turn this snipet into a function that returns a user specified length DNA sequence. Let's call it `generate_DNA`. 
+
+```{r}
+generate_DNA <- function(len=10){
+  n <- c("A", "T", "C", "G")
+  sample(n, size=len, replace = TRUE)
+}
+```
+
+or
+
+```{r}
+generate_DNA <- function(len=10, fasta=FALSE){
+  n <- c("A", "T", "C", "G")
+  v <- sample(n, size=len, replace = TRUE)
+  # make a single element vector
+  s <- paste(v, collapse="")
+  cat("Well done!\n")
+  if(fasta){
+    return(s)
+  }
+  else{
+    return(v)
+  }
+}
+```
+
+
+```{r}
+s <- generate_DNA(15)
+s
+```
+
+I want the option to return a single element character vector with my sequence all together like this: "GGAGTAC".
+
+```{r}
+s
+paste(s, collapse="")
+```
+
+```{r}
+generate_DNA(10, fasta=TRUE)
+```
+
+## A more advanced example
+
+Make a third function that generates protein sequence of a user specified length and format.
+
+```{r}
+proseq <- function(len=10, fasta=FALSE){
+  aa <- c("A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", 
+          "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+  seq <- sample(aa, size = len, replace = TRUE)
+  if (fasta) {
+    return(paste(seq, collapse = ""))
+  }
+  else {
+    return(seq)
+  }
+}
+```
+
+```{r}
+proseq(15, TRUE)
+```
+
+> Generate random protein sequences between lengths 5 and 12 amino acids.
+
+Our approach is to do this by brute force calling our function for each length 5 to 12.
+
+Another approach is to write a `for()` loop to iterate over the input valued 5 to 12.
+
+A very useful third R specific approach is to use the `saaply()` function.
+
+```{r}
+seq_length <- 6:12
+for (i in seq_length) {
+  cat(">", i, "\n")
+  cat(proseq(i))
+  cat("\n")
+}
+```
+
+```{r}
+sapply(6:12, proseq)
+```
+
+> **Key-point**: writing functions in R is doable but not the easiest thing in the world. Starting with a working snippet of come and then using LLM tools to improve and generalize your function code is a productive approach.
