@@ -1,2 +1,2 @@
-# bimm143_github
+# bimm143
 Classwork for BIMM143 at UC San Diego.
