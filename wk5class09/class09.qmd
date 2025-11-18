@@ -1,0 +1,143 @@
+---
+title: "Class09: Structural Bioinformatics Part 1"
+author: "Laura Sun (PID: A17923552)"
+format: pdf
+---
+
+## The PDB Database
+
+The main database for structural biology is called the PDB (Protein Data Bank). Let's have a look at what it contains:
+
+Download a CSV file from the PDB site (accessible from “Analyze” > “PDB Statistics” > “by Experimental Method and Molecular Type”. Move this CSV file into your RStudio project and use it to answer the following questions:
+
+```{r}
+pdbtable <- read.csv("DataExportSummary.csv")
+pdbtable
+```
+
+```{r}
+pdbtable$Total
+# sum(pdbtable[,"X.ray"]) not working because they are characters, not numeric.
+pdbtable$Total
+sub(",", "---", pdbtable$Total)
+```
+
+```{r pdbstats, message=FALSE}
+library(readr)
+stats <- read_csv("DataExportSummary.csv")
+stats
+```
+
+```{r}
+stats$Total
+```
+
+> Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy. Give to 2 sig figs.
+
+```{r}
+n.xray <- sum(stats$`X-ray`) #Add `` in X-ray
+n.total <- sum(stats$Total)
+round(n.xray/n.total*100, 2) # Use round(number,2)
+n.em <- sum(stats$EM)
+round(n.em/n.total*100, 2)
+
+```
+Around 81.48% of structures in the PDB are solved by X-Ray and 12.22% are solved by Electron Microscopy. 
+
+> Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+round(stats[1, "Total"]/ n.total* 100, 2)
+# or stats$Total[1]
+```
+
+86.05% are protein (only).
+
+> Q3: Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+In PDB website, there are 4865 structures for HIV and 1150 for HIV-1 protease.
+
+## Exploring PDB structures
+
+Package for structural bioinformatics.
+
+```{r}
+library(bio3d)
+
+hiv <- read.pdb("1hsg")
+hiv
+```
+
+Let's first use the Mol* viewer to explore this structure.
+molstar.org
+
+![My first view of HIV-Protease](1HSG.png)
+
+> Q4: Water molecules normally have 3 atoms. Why do we see just one atom per water molecule in this structure?
+
+It's for simplification. Now it's easier to view.
+
+> Q5: There is a critical “conserved” water molecule in the binding site. Can you identify this water molecule? What residue number does this water molecule have?
+
+This water molecule is important for binding with ligand. The residue number is HOH 308.
+
+And a view of the ligand (ball and stick) with catalytic ASP25 amino-acids (spacefill) and the all important active site water molecules (spacefill):
+
+![](1HSG2.png)
+
+
+## PDB objects in R
+
+```{r}
+head(hiv$atom)
+```
+
+Extract the sequence:
+
+```{r}
+pdbseq(hiv)
+```
+
+```{r}
+chainA_seq <- pdbseq(trim.pdb(hiv, chain="A"))
+```
+
+I can interactively view these PDB objects in R with the new **bio3dview** package. This is not yet on CRAN, put in console:
+install.packages("pak")
+pak::pak("bioboot/bio3dview")
+install.packages("NGLVieweR")
+
+```{r}
+library(bio3dview)
+view.pdb(hiv)
+```
+
+Change some settings
+
+```{r}
+sel <- atom.select(hiv, resno=25)
+
+view.pdb(hiv, highlight = sel, highlight.style = "vdw")
+```
+
+## Predict protein flexibility
+
+We can run a bioinformatics calculation to predict protein dynamics - i.e. functional motions.
+
+We will use the `nma()` function:
+
+```{r}
+adk <- read.pdb("6s36")
+adk
+```
+
+```{r}
+m <- nma(adk)
+plot(m)
+```
+
+Generate a "trajectory" of predicted motion
+```{r}
+mktrj(m, file="ADK_nma.pdb")
+```
+
