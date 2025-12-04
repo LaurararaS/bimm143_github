@@ -1,0 +1,8 @@
+---
+title: "RNA Seq with LLM"
+format: html
+---
+
+tool-global option-copilot-enable github copilot
+
+
