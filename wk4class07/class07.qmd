@@ -1,7 +1,7 @@
 ---
 title: "Class07: Machine Learning 1"
 author: "Laura Sun (A17923552)"
-format: pdf
+format: gfm
 ---
 
 Today we will explore some fundamental machine learning methods including clustering and dimensionality reduction.
