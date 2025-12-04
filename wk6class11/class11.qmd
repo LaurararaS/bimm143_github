@@ -1,7 +1,7 @@
 ---
 title: "Class11: Structural Bioinformatics"
 author: "Laura Sun (PID: A16923552)"
-format: pdf
+format: gfm
 ---
 
 ## AlphaFold Data Base (AFBD)
