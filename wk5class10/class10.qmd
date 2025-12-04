@@ -1,7 +1,7 @@
 ---
 title: "Class10: Halloween mini project"
 author: "Laura Sun (PID: A17923552)"
-format: pdf
+format: gfm
 toc: true
 ---
 
