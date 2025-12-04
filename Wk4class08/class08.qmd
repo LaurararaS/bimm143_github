@@ -1,7 +1,7 @@
 ---
 title: "class08: Mini Project"
 author: "Laura Sun (PID: A17923552)"
-format: pdf
+format: gfm
 tov: TRUE
 ---
 
