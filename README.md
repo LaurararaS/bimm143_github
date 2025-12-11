@@ -1,6 +1,12 @@
 # BIMM143
 Classwork for [BIMM143 at UC San Diego](https://bioboot.github.io/bimm143_F25/) during Fall 2025.
 
+- Class 01 NCBI & EBI Resources
+
+- Class 02 Sequence Alignment and Database Searching
+
+- Class 03 Advanced Sequence Alignment and Database Searching
+
 - Class 04 [R fundamentals](W2L2class04/class04.pdf)
   
 - Class 05 [Data Viz with ggplot](wk3class05/class05.md)
@@ -19,9 +25,9 @@ Classwork for [BIMM143 at UC San Diego](https://bioboot.github.io/bimm143_F25/) 
 
 - Class 12 [Transcriptomics, RNA-Seq Analysis](wk6class12/class12.md)
 
-- Class 13 Veterans Day Haliday
+- Class 13 Veterans Day Holiday
 
-- Class 14 [RNA-Seq Mini Project]()
+- Class 14 [RNA-Seq Mini Project](Wk7Class14/class14.md)
 
 - Class 15 [Hands-On with Git and Github]()
 
@@ -29,6 +35,6 @@ Classwork for [BIMM143 at UC San Diego](https://bioboot.github.io/bimm143_F25/) 
 
 - Class 17 [Genome Informatics and High Throughput Sequencing]()
 
-- Class 18 [Thanksggiving Holiday]()
+- Class 18 Thanksgiving Holiday
 
-- Class 19 [Investigating Pertussis Resurgence Mini Project]()
+- Class 19 [Investigating Pertussis Resurgence Mini Project](wk10class19/wk10class19.md)
