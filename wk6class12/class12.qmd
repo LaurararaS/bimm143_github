@@ -1,7 +1,7 @@
 ---
 title: "Class 12: RNASeq Analysis"
 author: "Laura Sun (PID:A17923552)"
-format: pdf
+format: gfm
 toc: true
 ---
 
