@@ -108,16 +108,16 @@ pak::pak("bioboot/bio3dview")
 install.packages("NGLVieweR")
 
 ```{r}
-library(bio3dview)
-view.pdb(hiv)
+# library(bio3dview)
+# view.pdb(hiv)
 ```
 
 Change some settings
 
 ```{r}
-sel <- atom.select(hiv, resno=25)
+# sel <- atom.select(hiv, resno=25)
 
-view.pdb(hiv, highlight = sel, highlight.style = "vdw")
+# view.pdb(hiv, highlight = sel, highlight.style = "vdw")
 ```
 
 ## Predict protein flexibility
