@@ -9,7 +9,7 @@ Classwork for [BIMM143 at UC San Diego](https://bioboot.github.io/bimm143_F25/) 
   
 - Class 07 [Machine Learning 1](wk4class07/class07.md)
   
-- Class 08 [Breast Cancer Analysis Mini Project]()
+- Class 08 [Breast Cancer Analysis Mini Project](Wk4class08/class08.md)
   
 - Class 09 [Structural Bioinformatics 1]()
   
@@ -17,7 +17,7 @@ Classwork for [BIMM143 at UC San Diego](https://bioboot.github.io/bimm143_F25/) 
 
 - Class 11 [Structural Bioinformatics 2: AlphaFolf](wk6class11/class11.md)
 
-- Class 12 [Transcriptomics, RNA-Seq Analysis]()
+- Class 12 [Transcriptomics, RNA-Seq Analysis](wk6class12/class12.md)
 
 - Class 13 Veterans Day Haliday
 
