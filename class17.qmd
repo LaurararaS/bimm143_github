@@ -1,0 +1,85 @@
+---
+title: "Genome Informatics"
+author: "Laura Sun (PID: A17923552)"
+format: gfm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Section 1: Proportion of G/G in a population
+
+Download a csv from Ensemble < https://useast.ensembl.org/Homo_sapiens/Variation/Sample?db=core;r=17:39876388-40046389;v=rs8067378;vdb=variation;vf=959672880#373531_tablePanel >
+
+Here we read csv file for MXL:
+
+```{r}
+mxl <- read.csv("wk9/373531-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+head(mxl)
+```
+
+```{r}
+table(mxl$Genotype..forward.strand.)
+```
+
+```{r}
+table(mxl$Genotype..forward.strand.)/nrow(mxl)*100
+```
+
+Let's look at a different population:
+
+```{r}
+gbr <- read.csv("wk9/373522-SampleGenotypes-Homo_sapiens_Variation_Sample_rs8067378.csv")
+```
+
+```{r}
+table(gbr$Genotype..forward.strand.)
+```
+
+```{r}
+round(table(gbr$Genotype..forward.strand.)/nrow(gbr) * 100,2)
+```
+
+This variant that is associated with child asthma is more frequent in the GBR population than MKL population.
+
+Let's dig further:
+
+## Section 4: Population Scale Analysis [HOMEWORK]
+
+One sample is obviously not enough to know what is happening in a population. You are interested in assessing genetic differences on a population scale. 
+
+How many samples do we have?
+
+```{r}
+expr <- read.table("wk9/rs8067378_ENSG00000172057.6.txt")
+head(expr)
+```
+
+```{r}
+nrow(expr)
+```
+
+Sample size of each genotype:
+
+```{r}
+table(expr$geno)
+```
+Median expression levels of each genotype:
+
+```{r}
+library(dplyr)
+expr %>% group_by(geno) %>% summarize(median=median(exp))
+```
+
+```{r}
+library(ggplot2)
+```
+
+Let's make a boxplot:
+
+```{r}
+ggplot(expr) + aes(geno, exp, fill=geno) + geom_boxplot(notch=TRUE)
+```
+
+From this plot, we see that the relative expression levels are A|A > A|G > G|G, with a relatively big difference. SNP does effect the expression of ORMDL3.
